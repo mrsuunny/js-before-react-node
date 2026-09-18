@@ -76,29 +76,29 @@ safeWithdraw(100, -10);  // "Withdrawal failed: Withdrawal amount must be positi
 
 // ---------------- EXAMPLE 3: try/catch with async/await + finally cleanup ----------------
 // What this shows: real-world pattern for handling a failed async operation with cleanup.
-function fetchFakeData(shouldFail) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (shouldFail) reject(new Error("Network error"));
-      else resolve({ id: 1, title: "Post" });
-    }, 200);
-  });
-}
+// function fetchFakeData(shouldFail) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       if (shouldFail) reject(new Error("Network error"));
+//       else resolve({ id: 1, title: "Post" });
+//     }, 200);
+//   });
+// }
 
-async function loadData(shouldFail) {
-  console.log("Loading started...");
-  try {
-    const data = await fetchFakeData(shouldFail); // may throw
-    console.log("Loaded:", data);
-  } catch (error) {
-    console.log("Could not load data:", error.message);
-  } finally {
-    console.log("Loading finished (spinner would hide here)."); // always runs
-  }
-}
+// async function loadData(shouldFail) {
+//   console.log("Loading started...");
+//   try {
+//     const data = await fetchFakeData(shouldFail); // may throw
+//     console.log("Loaded:", data);
+//   } catch (error) {
+//     console.log("Could not load data:", error.message);
+//   } finally {
+//     console.log("Loading finished (spinner would hide here)."); // always runs
+//   }
+// }
 
-loadData(false);
-loadData(true);
+// loadData(false);
+// loadData(true);
 
 // WORKFLOW:
 // 1. `await fetchFakeData(shouldFail)` either resolves (data continues normally)
@@ -106,3 +106,29 @@ loadData(true);
 // 2. `catch` handles the failure case gracefully instead of crashing the app.
 // 3. `finally` runs in BOTH cases — this is exactly where you'd hide a loading
 //    spinner or re-enable a button, regardless of success/failure.
+
+
+function fetchFakeData (shouldFail)  {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (shouldFail) reject(new error("Kaam py gya ustad"));
+        else resolve({ id: 1, name: "Sanaullah" });
+    }, 200);
+  });
+}
+
+async function loadData(shouldFail) {
+  console.log("Hello G! Loading start ho gyi jy...")
+  try{
+    const data = await fetchFakeData(shouldFail)
+    console.log("lo g mubarak hoye Data a gya jy: ", data) }
+    catch (error) {
+      console.log("Data load e nai hoya, a ty kaam harab aaa, lo g: ", error.Error)
+    }
+    finally{
+      console.log("Lo g jo hona si ho gya, hun bas dua kiti ja sakdi")
+    }
+}
+
+loadData(true);
+loadData(false);

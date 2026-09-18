@@ -25,19 +25,19 @@ Treat the two blocks below as if they were TWO DIFFERENT FILES.
 
 // ---------------- EXAMPLE 1: Named exports/imports ----------------
 // ==== FILE: mathUtils.js ====
-// export function add(a, b) {
-//   return a + b;
-// }
-// export function subtract(a, b) {
-//   return a - b;
-// }
-// export const PI = 3.14159;
+export function add(a, b) {
+  return a + b;
+}
+export function subtract(a, b) {
+  return a - b;
+}
+export const PI = 3.14159;
 
 // ==== FILE: app.js ====
-// import { add, subtract, PI } from "./mathUtils.js";
-// console.log(add(2, 3));      // 5
-// console.log(subtract(5, 2)); // 3
-// console.log(PI);             // 3.14159
+import { add, subtract, PI } from "./mathUtils.js";
+console.log(add(2, 3));      // 5
+console.log(subtract(5, 2)); // 3
+console.log(PI);             // 3.14159
 
 // WORKFLOW:
 // 1. Each `export` in mathUtils.js registers that specific name as available to other files.
@@ -48,14 +48,14 @@ Treat the two blocks below as if they were TWO DIFFERENT FILES.
 
 // ---------------- EXAMPLE 2: Default export/import ----------------
 // ==== FILE: Calculator.js ====
-// export default function Calculator(a, b) {
-//   return { sum: a + b, diff: a - b };
-// }
+export default function Calculator(a, b) {
+  return { sum: a + b, diff: a - b };
+}
 
 // ==== FILE: app.js ====
-// import Calculator from "./Calculator.js"; // NO curly braces for default imports
-// import MyCalc from "./Calculator.js";     // you can name it ANYTHING you want
-// console.log(Calculator(4, 2)); // { sum: 6, diff: 2 }
+import Calculator from "./Calculator.js"; // NO curly braces for default imports
+import MyCalc from "./Calculator.js";     // you can name it ANYTHING you want
+console.log(Calculator(4, 2)); // { sum: 6, diff: 2 }
 
 // WORKFLOW:
 // 1. `export default` marks ONE thing per file as "the main export" — there can only
@@ -67,20 +67,20 @@ Treat the two blocks below as if they were TWO DIFFERENT FILES.
 
 // ---------------- EXAMPLE 3: Mixing named + default, and renaming on import ----------------
 // ==== FILE: userService.js ====
-// export default function getUser(id) {
-//   return { id, name: "Sanaullah" };
-// }
-// export function getUserRole(id) {
-//   return "admin";
-// }
+export default function getUser(id) {
+  return { id, name: "Sanaullah" };
+}
+export function getUserRole(id) {
+  return "admin";
+}
 
 // ==== FILE: app.js ====
-// import getUser, { getUserRole } from "./userService.js"; // default + named together
-// import { getUserRole as getRole } from "./userService.js"; // renaming with "as"
-//
-// console.log(getUser(1));       // { id: 1, name: "Sanaullah" }
-// console.log(getUserRole(1));   // "admin"
-// console.log(getRole(1));       // "admin" -> same function, different local name
+import getUser, { getUserRole } from "./userService.js"; // default + named together
+import { getUserRole as getRole } from "./userService.js"; // renaming with "as"
+
+console.log(getUser(1));       // { id: 1, name: "Sanaullah" }
+console.log(getUserRole(1));   // "admin"
+console.log(getRole(1));       // "admin" -> same function, different local name
 
 // WORKFLOW:
 // 1. A single file can have ONE default export AND multiple named exports at the same time.
